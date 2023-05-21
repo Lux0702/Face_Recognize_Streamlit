@@ -290,7 +290,6 @@ elif add_selectbox=="Li thuyet XLA":
 
     elif(Li_thuyet_XLA_selected=="Logarit"):
         st.session_state.Li_thuyet_XLA_selected = Li_thuyet_XLA_selected
-        placeholder.empty()
 
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
