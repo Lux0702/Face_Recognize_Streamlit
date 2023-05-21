@@ -63,7 +63,7 @@ def Histogram(imgin, imgout):
             r = imgin[x, y]
             h[r] = h[r] + 1
 
-    p = np.zeros(L, np.float)
+    p = np.zeros(L, np.float64)
     for r in range(0, L):
         p[r] = h[r]/(M*N)
 
@@ -80,11 +80,11 @@ def HistogramEqualization(imgin, imgout):
             r = imgin[x, y]
             h[r] = h[r] + 1
 
-    p = np.zeros(L, np.float)
+    p = np.zeros(L, np.float64)
     for r in range(0, L):
         p[r] = h[r]/(M*N)
 
-    s = np.zeros(L, np.float)
+    s = np.zeros(L, np.float64)
     for k in range(0, L):
         for j in range(0, k + 1):
             s[k] = s[k] + p[j]
@@ -156,7 +156,7 @@ def Smoothing(imgin):
     n = 21
     a = m // 2
     b = m // 2
-    w = np.ones((m,n),np.float)/(m*n)
+    w = np.ones((m,n),np.float64)/(m*n)
     imgout = cv2.filter2D(imgin,cv2.CV_8UC1, w)
     # imgout = cv2.blur(imgin, (m,n))
     return imgout
@@ -168,7 +168,7 @@ def SmoothingGauss(imgin):
     a = m // 2
     b = m // 2
     sigma = 7.0
-    w = np.zeros((m,n), np.float)
+    w = np.zeros((m,n), np.float64)
     for s in range(-a, a+1):
         for t in range(-b, b+1):
             w[s+a, t+b] = np.exp(-(s*s + t*t)/(2*sigma*sigma))
@@ -238,7 +238,7 @@ def Sharpen(imgin):
     return imgout
 
 def UnSharpMasking(imgin):
-    blur = cv2.GaussianBlur(imgin, (3, 3), 1.0).astype(np.float)
+    blur = cv2.GaussianBlur(imgin, (3, 3), 1.0).astype(np.float64)
     mask = imgin - blur
     k = 10.0
     imgout = imgin + k*mask

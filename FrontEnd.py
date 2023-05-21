@@ -254,7 +254,6 @@ elif add_selectbox=="Face_Recognize":
         FRAME_WINDOW.image(frame, channels='BGR')
       cv.destroyAllWindows()  
 elif add_selectbox=="Li thuyet XLA":
-  placeholder = st.empty()
   st.session_state.add_selectbox = False
   st.markdown("<style>#MainMenu { visibility: hidden; }</style>", unsafe_allow_html=True)
   with st.sidebar:
@@ -267,11 +266,7 @@ elif add_selectbox=="Li thuyet XLA":
     )  
   if 'Li_thuyet_XLA_selected' not in st.session_state or Li_thuyet_XLA_selected != st.session_state.Li_thuyet_XLA_selected:
     # Đặt lại ứng dụng về trạng thái ban đầu
-    st.session_state.selected_option = Li_thuyet_XLA_selected
     if(Li_thuyet_XLA_selected=="Negative"):
-        placeholder.empty()
-
-        st.session_state.Li_thuyet_XLA_selected = False
         st.markdown("<style>#MainMenu { visibility: hidden; }</style>", unsafe_allow_html=True)
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
@@ -289,8 +284,6 @@ elif add_selectbox=="Li thuyet XLA":
                 st.image(imgout, caption='ImageOut')
 
     elif(Li_thuyet_XLA_selected=="Logarit"):
-        st.session_state.Li_thuyet_XLA_selected = Li_thuyet_XLA_selected
-
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -306,7 +299,6 @@ elif add_selectbox=="Li thuyet XLA":
             c3.Logarit(imgin,imgout)
             st.image(imgout, caption='ImageOut') 
     elif(Li_thuyet_XLA_selected=="Power"):
-        st.session_state.Li_thuyet_XLA_selected = Li_thuyet_XLA_selected
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -322,7 +314,6 @@ elif add_selectbox=="Li thuyet XLA":
             c3.Power(imgin,imgout)
             st.image(imgout, caption='ImageOut')
     elif(Li_thuyet_XLA_selected=="PiecewiseLinear"):
-        st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -338,7 +329,6 @@ elif add_selectbox=="Li thuyet XLA":
             c3.PiecewiseLinear(imgin,imgout)
             st.image(imgout, caption='ImageOut')      
     elif(Li_thuyet_XLA_selected=="Histogram"):
-        st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -354,7 +344,6 @@ elif add_selectbox=="Li thuyet XLA":
             c3.Logarit(imgin,imgout)
             st.image(imgout, caption='ImageOut')
     elif(Li_thuyet_XLA_selected=="HistogramEqualization"):
-        st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -370,7 +359,6 @@ elif add_selectbox=="Li thuyet XLA":
             c3.HistogramEqualization(imgin,imgout)
             st.image(imgout, caption='ImageOut')  
     elif(Li_thuyet_XLA_selected=="LocalHistogram"):
-        st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -386,7 +374,6 @@ elif add_selectbox=="Li thuyet XLA":
             c3.LocalHistogram(imgin,imgout)
             st.image(imgout, caption='ImageOut')      
     elif(Li_thuyet_XLA_selected=="HistogramStatistics"):
-        st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             image=Image.open(uploaded_file)
@@ -414,9 +401,9 @@ elif add_selectbox=="Li thuyet XLA":
 
             imgin = np.array(Image.open("digit.jpg").convert('L'))
             M, N = imgin.shape
-            imgout = np.zeros((M, N), np.uint8)
-            c3.Smoothing(imgin,imgout)
-            st.image(imgout, caption='ImageOut')        
+            c3.Smoothing(imgin)
+            #st.image(imgout, caption='ImageOut') 
+            st.image(c3.Smoothing(imgin), caption='ImageOut')        
     elif(Li_thuyet_XLA_selected=="SmoothingGauss"):
         st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
@@ -430,9 +417,7 @@ elif add_selectbox=="Li thuyet XLA":
 
             imgin = np.array(Image.open("digit.jpg").convert('L'))
             M, N = imgin.shape
-            imgout = np.zeros((M, N), np.uint8)
-            c3.SmoothingGauss(imgin,imgout)
-            st.image(imgout, caption='ImageOut')
+            st.image(c3.SmoothingGauss(imgin), caption='ImageOut')
     elif(Li_thuyet_XLA_selected=="MedianFilter"):
         st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
@@ -462,9 +447,7 @@ elif add_selectbox=="Li thuyet XLA":
 
             imgin = np.array(Image.open("digit.jpg").convert('L'))
             M, N = imgin.shape
-            imgout = np.zeros((M, N), np.uint8)
-            c3.Sharpen(imgin,imgout)
-            st.image(imgout, caption='ImageOut')
+            st.image(c3.Sharpen(imgin), caption='ImageOut')
     elif(Li_thuyet_XLA_selected=="UnSharpMasking"):
         st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
@@ -478,9 +461,7 @@ elif add_selectbox=="Li thuyet XLA":
 
             imgin = np.array(Image.open("digit.jpg").convert('L'))
             M, N = imgin.shape
-            imgout = np.zeros((M, N), np.uint8)
-            c3.UnSharpMasking(imgin,imgout)
-            st.image(imgout, caption='ImageOut')
+            st.image(c3.UnSharpMasking(imgin), caption='ImageOut')
     elif(Li_thuyet_XLA_selected=="UnSharpMasking"):
         st.session_state.Li_thuyet_XLA_selected = False
         uploaded_file = st.file_uploader("Choose a file")
@@ -491,12 +472,24 @@ elif add_selectbox=="Li thuyet XLA":
             image.save('digit.jpg')
         btn_pre=st.button("UnSharpMasking")
         if btn_pre:
-
             imgin = np.array(Image.open("digit.jpg").convert('L'))
             M, N = imgin.shape
             imgout = np.zeros((M, N), np.uint8)
             c3.UnSharpMasking(imgin,imgout)
             st.image(imgout, caption='ImageOut')
+    elif(Li_thuyet_XLA_selected=="Gradient"):
+        st.session_state.Li_thuyet_XLA_selected = False
+        uploaded_file = st.file_uploader("Choose a file")
+        if uploaded_file is not None:
+            image=Image.open(uploaded_file)
+            st.image(image)
+            image.convert('RGB')
+            image.save('digit.jpg')
+        btn_pre=st.button("onGradient")
+        if btn_pre:
+            imgin = np.array(Image.open("digit.jpg").convert('L'))
+            M, N = imgin.shape
+            st.image(c3.UnSharpMasking(imgin), caption='ImageOut')
 elif add_selectbox=="Training":
     st.session_state.Li_thuyet_XLA_selected=False
     st.header("Training data user via Face - 📌")
